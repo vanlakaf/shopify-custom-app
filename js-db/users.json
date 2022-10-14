@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": 110214353,
+      "firstName": "Admin",
+      "lastName": "ADMIN",
+      "username": "username",
+      "password": "password",
+      "avatar": "http://localhost:3032/medias/avatars/admin.jpg"
+    }
+  ]
+}
