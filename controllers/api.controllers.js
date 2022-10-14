@@ -5,13 +5,16 @@
 
 const path = require("path");
 const fs = require("fs");
-const { customRequire, generateToken } = require("../utils");
+const { customRequire, generateToken, axiosClient } = require("../utils");
+
+const { ACCESS_KEY } = process.env;
 
 const apiController = {
   login,
   verify,
   logout,
   saveProduct,
+  editProduct,
   destroyProduct,
 };
 
@@ -112,14 +115,90 @@ function logout(/** @type { Request } */ req, /** @type { Response } */ res) {
   });
 }
 
-function saveProduct(
+async function saveProduct(
   /** @type { Request } */ req,
   /** @type { Response } */ res
-) {}
+) {
+  const { title, description } = req.body;
+  if (!title || !description) {
+    res.json({ error: { code: 500, message: "Invalid data." } });
+    return;
+  }
 
-function destroyProduct(
+  try {
+    const newProduct = await axiosClient
+      .post(
+        "/products.json",
+        {
+          product: {
+            title,
+            body_html: description,
+            vendor: "vaneck-store",
+          },
+        },
+        {
+          headers: {
+            "X-Shopify-Access-Token": ACCESS_KEY,
+          },
+        }
+      )
+      .then((response) => response.data.product);
+    res.json({ result: { product: newProduct } });
+  } catch (error) {
+    res.json({ error: { code: 500, message: "Cannot save product." } });
+  }
+}
+
+async function editProduct(
   /** @type { Request } */ req,
   /** @type { Response } */ res
-) {}
+) {
+  const { productId } = req.params;
+  const { title, description } = req.body;
+  if (!title || !description) {
+    res.json({ error: { code: 500, message: "Invalid data." } });
+    return;
+  }
+
+  try {
+    await axiosClient
+      .put(
+        "/products/" + productId + ".json",
+        {
+          product: {
+            title,
+            body_html: description,
+          },
+        },
+        {
+          headers: {
+            "X-Shopify-Access-Token": ACCESS_KEY,
+          },
+        }
+      );
+    res.json({ result: { success: true } });
+  } catch (error) {
+    res.json({ error: { code: 500, message: "Cannot save product." } });
+  }
+}
+
+async function destroyProduct(
+  /** @type { Request } */ req,
+  /** @type { Response } */ res
+) {
+  const { productId } = req.params;
+
+  try {
+    await axiosClient.delete("/products/" + productId + ".json", {
+      headers: {
+        "X-Shopify-Access-Token": ACCESS_KEY,
+      },
+    });
+
+    res.json({ result: { success: true } });
+  } catch (error) {
+    res.json({ error: { code: 500, message: "Cannot delete product." } });
+  }
+}
 
 module.exports = apiController;

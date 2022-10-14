@@ -3,7 +3,9 @@
  * @typedef { import("express").Response } Response
  */
 
-const { computeOptions, axiosClient } = require("../utils");
+const { axiosClient } = require("../utils");
+
+const { ACCESS_KEY } = process.env;
 
 const clientController = {
   home,
@@ -16,11 +18,12 @@ async function home(
   const products = await axiosClient
     .get("/products.json", {
       headers: {
-        "X-Shopify-Access-Token": "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",
+        "X-Shopify-Access-Token": ACCESS_KEY,
       },
     })
     .then((res) => res.data.products);
-  res.render("index", computeOptions(req));
+    
+  res.render("index", { products });
 }
 
 module.exports = clientController;

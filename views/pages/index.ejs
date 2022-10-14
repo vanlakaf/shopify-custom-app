@@ -1,15 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopify Back Office</title>
-    <link rel="stylesheet" href="style/app.css">
+    <link rel="stylesheet" href="style/app.css" />
     <script src="js/apiClient.js"></script>
     <script src="js/app.js"></script>
-</head>
-<body>
-    <p>Hello from QUABLE TEST.</p>
-</body>
+  </head>
+  <body>
+    <header>
+      <h2>Shopify Back Office</h2>
+      <button id="logout">Logout</button>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <td>Title</td>
+          <td>Description</td>
+          <td>Actions</td>
+        </thead>
+        <tbody>
+          <% for (var product of products) { %>
+          <tr id="product-<%= product.id %>">
+            <td class="title"><%= product.title %></td>
+            <td class="description"><%- product.body_html %></td>
+            <td>
+              <button class="edit-product" data-product-id="<%= product.id %>">
+                <ion-icon
+                  name="pencil"
+                  data-product-id="<%= product.id %>"
+                ></ion-icon>
+              </button>
+              <button
+                class="delete-product"
+                data-product-id="<%= product.id %>"
+              >
+                <ion-icon
+                  name="trash"
+                  data-product-id="<%= product.id %>"
+                ></ion-icon>
+              </button>
+              <button
+                class="save-edit-product hide"
+                data-product-id="<%= product.id %>"
+              >
+                <ion-icon
+                  name="checkmark-outline"
+                  data-product-id="<%= product.id %>"
+                ></ion-icon>
+              </button>
+              <button
+                class="cancel-edit hide"
+                data-product-id="<%= product.id %>"
+              >
+                <ion-icon
+                  name="close"
+                  data-product-id="<%= product.id %>"
+                ></ion-icon>
+              </button>
+            </td>
+          </tr>
+          <% } %>
+          <tr>
+            <td class="inputs"><input type="text" id="title" /></td>
+            <td class="inputs"><input type="text" id="description" /></td>
+            <td>
+              <button id="add-product">
+                <ion-icon name="checkmark-outline"></ion-icon>
+              </button>
+              <button id="clear">
+                <ion-icon name="close"></ion-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>

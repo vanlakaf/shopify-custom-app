@@ -9,6 +9,7 @@ apiRoutes
   .get("/auth/verify", apiController.verify)
   .post("/auth/logout", authMiddleware, apiController.logout)
   .post("/shopify/products", authMiddleware, apiController.saveProduct)
+  .put("/shopify/products/:productId", authMiddleware, apiController.editProduct)
   .delete(
     "/shopify/products/:productId",
     authMiddleware,

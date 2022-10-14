@@ -1,0 +1,93 @@
+:root {
+}
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  height: 50px;
+  width: calc(100% - 50px);
+  margin: 0;
+  padding: 20px 25px;
+  background-color: #0a7a70;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+header h2 {
+  margin: 0;
+  padding: 10px 0 0 0;
+}
+
+header button#logout {
+  background-color: #074443;
+  color: white;
+  padding: 5px 20px;
+  margin: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+main {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  margin: 10px 5px;
+  width: calc(100% - 10px);
+}
+tr,
+thead,
+td,
+tbody {
+  border: solid 2px #0a7a7056;
+  margin: 0;
+}
+td {
+  padding: 5px 7px;
+}
+thead td {
+  font-weight: 600;
+}
+
+td.inputs {
+  padding: 0;
+}
+
+input {
+  margin: 0;
+  padding: 7px 5px;
+  border: solid 2px transparent;
+  height: 100%;
+  width: calc(100% - 14px);
+  outline: none;
+  transition: border-color 0.3s linear;
+}
+
+input:focus {
+  border-color: #0a7a7089;
+}
+
+td button {
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+  border: none;
+  margin: 0 0 0 3px;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
