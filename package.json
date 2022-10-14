@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://vanlakaf.github.com/shopify-custom-app.git"
+    "url": "git+https://github.com/vanlakaf/shopify-custom-app.git"
   },
   "keywords": [
     "web",
@@ -30,7 +30,7 @@
   "author": "FEKAMO SARL (Vaneck KAFFO)",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/lakafit.sunday-foot.cm/fullstack/issues"
+    "url": "https://github.com/vanlakaf/shopify-custom-app/issues"
   },
-  "homepage": "https://gitlab.com/lakafit.sunday-foot.cm/fullstack#readme"
+  "homepage": "https://github.com/vanlakaf/shopify-custom-app#readme"
 }
